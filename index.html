@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Downloader</title>
+    <script src="fetchGithub.js"></script>
+    <script src="./jszip.min.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+</head>
+
+<body onload="document.getElementById('urlField').value = '';document.getElementById('token').value = localStorage.getItem('token') ? localStorage.getItem('token') : '';" style="color: white; background-color: black;">
+
+    
+    <script src="index.js"></script>
+
+    <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--4-col"></div>
+        <div class="mdl-cell mdl-cell--4-col">
+            <h2>Enter GitHub folder URL from repository</h2>
+            <p>With this tool, you can download a single folder from a GitHub repository. So you don't have to download the whole repository.</p>
+            <hr>
+            <p>Example: <span style="color: gray;">https://github.com/google/material-design-lite/tree/mdl-1.x/src</span></p>
+            <form action="">
+                <div style="width: 100%;" class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" id="urlField" type="text" style="border-bottom-color: white;">
+                    <label style="color: white;" class="mdl-textfield__label" for="urlField">Enter URL</label>
+                </div>
+                <div style="width: 100%;" class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" id="token" type="text" style="border-bottom-color: white;" onchange="localStorage.setItem('token', this.value)">
+                    <label style="color: white;" class="mdl-textfield__label" for="token">GitHub Token (optional, but recommended)</label>
+                </div>
+            </form>
+            <button style="width: 100%;color: white;" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                onclick="window.open('https://github.com/settings/tokens/new?description=Download%20GitHub%20directory&scopes=repo', '_blank').focus()"
+                >
+                Create Token
+            </button>
+            
+            
+            <br>
+            <hr>
+            <div id="loader" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"
+                style="width: 100%; display: none;"></div>
+            <br>
+            <button style="width: 100%;color: white;" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                onclick="main(document.getElementById('urlField').value)"
+                id="button">
+                Download
+            </button>
+        </div>
+        <div class="mdl-cell mdl-cell--4-col"></div>
+    </div>
+
+
+</body>
+
+</html>
