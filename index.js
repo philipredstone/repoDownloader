@@ -9,7 +9,7 @@ function getUrlData(url) {
   try {
     parsedUrl = new URL(url);
   } catch (error) {
-    alert("Please anter a valid URL");
+    alert("Please enter a valid URL");
     document.getElementById("loader").style.display = "none";
     document.getElementById("button").disabled = false;
     return;
@@ -20,7 +20,7 @@ function getUrlData(url) {
   try {
     [url, user, repository, ref, dir] = urlParserRegex.exec(parsedUrl.pathname);
   } catch (error) {
-    alert("Please anter a valid URL");
+    alert("Please enter a valid URL");
     document.getElementById("loader").style.display = "none";
     document.getElementById("button").disabled = false;
   }
@@ -100,23 +100,4 @@ async function addToZip(blob, dir) {
         };
       });
   }
-}
-
-function dataURLtoFile(dataurl) {
-  var arr = dataurl.split(",");
-  var mime = arr[0].match(/:(.*?);/)[1];
-  var bstr = atob(arr[1]);
-  var n = bstr.length;
-  var u8arr = new Uint8Array(n);
-  while (n--) {
-    u8arr[n] = bstr.charCodeAt(n);
-  }
-  return new Blob([u8arr], { type: mime });
-}
-
-function createDownloadFileUrl(fileName, file) {
-  const blob = this.dataURLtoFile(`data:application/zip;base64,${file}`);
-  blob.lastModifiedDate = new Date();
-  blob.name = fileName;
-  return URL.createObjectURL(blob);
 }
